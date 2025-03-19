@@ -10,7 +10,9 @@ WORKDIR /app
 
 
 COPY requirements.txt .
-
+COPY main.py /app/
+COPY database.py /app/
+COPY models.py /app/
 
 RUN pip install --no-cache-dir -r requirements.txt
 

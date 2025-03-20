@@ -1,13 +1,7 @@
-until redis-cli -h redis ping; do
-  echo "Waiting for Redis to be ready..."
+until redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" ping; do
+  echo "Ожидание"
   sleep 2
 done
 
-
-until pg_isready -h db -U postgres; do
-  echo "Waiting for PostgreSQL to be ready..."
-  sleep 2
-done
-
-
+echo "Redis доступен"
 exec "$@"

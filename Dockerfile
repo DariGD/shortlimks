@@ -16,10 +16,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY main.py /app/
 COPY database.py /app/
 COPY models.py /app/
+COPY wait-for-redis.sh /app/wait-for-redis.sh
 
-# Открываем порты
+
+RUN chmod +x /app/wait-for-redis.sh
+
 EXPOSE 8000
-
 
 # Запускаем приложение через Uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

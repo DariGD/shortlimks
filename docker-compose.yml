@@ -20,7 +20,7 @@ services:
       - .env
     networks:
       - app-network
-    command: /bin/bash -c "/app/wait-for-redis.sh && uvicorn main:app --host 0.0.0.0 --port 8000"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
 
   redis:
     image: redis:latest

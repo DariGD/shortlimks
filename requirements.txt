@@ -14,3 +14,4 @@ virtualenv==20.28.1
 psycopg2-binary==2.9.10
 SQLAlchemy==2.0.39
 sqlalchemy-orm==1.2.10
+passlib==1.7.4

@@ -16,10 +16,12 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD") 
+
 r = redis.Redis(
     host='mighty-cougar-32942.upstash.io',  
     port=6379,  
-    password='${REDIS_PASSWORD}', 
+    password=REDIS_PASSWORD, 
     ssl=True  
 )
 

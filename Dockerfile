@@ -18,8 +18,6 @@ COPY database.py /app/
 COPY models.py /app/
 
 
-RUN chmod +x /app/wait-for-redis.sh
-
 EXPOSE 8000
 
 # Запускаем приложение через Uvicorn

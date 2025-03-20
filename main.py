@@ -16,10 +16,12 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-redis_host = os.getenv('REDIS_HOST', 'redis')
-redis_port = os.getenv('REDIS_PORT', 6379)
-
-r = redis.StrictRedis(host=redis_host, port=redis_port, db=0, decode_responses=True)
+r = redis.Redis(
+  host='mighty-cougar-32942.upstash.io',
+  port=6379,
+  password='********',
+  ssl=True
+)
 
 SECRET_KEY = "your_secret_key"
 ALGORITHM = "HS256"

@@ -16,7 +16,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY main.py /app/
 COPY database.py /app/
 COPY models.py /app/
-COPY wait-for-redis.sh /app/wait-for-redis.sh
 
 
 RUN chmod +x /app/wait-for-redis.sh
@@ -24,5 +23,5 @@ RUN chmod +x /app/wait-for-redis.sh
 EXPOSE 8000
 
 # Запускаем приложение через Uvicorn
-CMD ["/app/wait-for-redis.sh", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 

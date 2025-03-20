@@ -24,5 +24,5 @@ RUN chmod +x /app/wait-for-redis.sh
 EXPOSE 8000
 
 # Запускаем приложение через Uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/app/wait-for-redis.sh", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 

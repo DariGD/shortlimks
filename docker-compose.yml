@@ -8,8 +8,9 @@ services:
       - redis
       - db
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_HOST=mighty-cougar-32942.upstash.io
+      - REDIS_PORT=6379  
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - DB_HOST=db
       - DB_PORT=5432
       - DB_USER=postgres

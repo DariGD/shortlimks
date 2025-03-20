@@ -1,3 +1,4 @@
+version: '3'
 services:
   app:
     build: .
@@ -9,10 +10,16 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=G13m8sa4
+      - DB_NAME=shortlinks
     env_file:
       - .env
     networks:
       - app-network
+    command: ["/app/wait-for-redis.sh", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
   redis:
     image: redis:latest
@@ -20,6 +27,12 @@ services:
       - "6379:6379"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
 
   db:
     image: postgres:13
@@ -33,6 +46,12 @@ services:
       - app-network
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
 
 volumes:
   postgres_data:
@@ -40,4 +59,5 @@ volumes:
 networks:
   app-network:
     driver: bridge
+
 
